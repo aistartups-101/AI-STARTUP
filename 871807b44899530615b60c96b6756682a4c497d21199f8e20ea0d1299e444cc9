@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fluency — Mastering Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a5f4a;
+            --primary-dark: #0d3d2e;
+            --accent: #d4a853;
+            --accent-light: #e8c97a;
+            --bg: #f7f4ed;
+            --bg-card: #ffffff;
+            --bg-subtle: #ede8dc;
+            --text: #2c2c2c;
+            --text-muted: #6b6b6b;
+            --text-light: #8a8a8a;
+            --border: #e0dcd0;
+            --shadow: rgba(26, 95, 74, 0.08);
+            --shadow-strong: rgba(26, 95, 74, 0.15);
+            --gradient-hero: linear-gradient(135deg, #1a5f4a 0%, #2d8a6e 50%, #1a5f4a 100%);
+        }
+
+        .dark {
+            --primary: #3db88c;
+            --primary-dark: #2d8a6e;
+            --accent: #e8c97a;
+            --accent-light: #f0d898;
+            --bg: #0f1410;
+            --bg-card: #1a2420;
+            --bg-subtle: #151c18;
+            --text: #e8e6e1;
+            --text-muted: #a0a0a0;
+            --text-light: #707070;
+            --border: #2a3530;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-strong: rgba(0, 0, 0, 0.5);
+            --gradient-hero: linear-gradient(135deg, #0f1410 0%, #1a2e24 50%, #0f1410 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Geometric Background Pattern */
+        .pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 0;
+            background-image:
+                linear-gradient(30deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary)),
+                linear-gradient(150deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary)),
+                linear-gradient(30deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary)),
+                linear-gradient(150deg, var(--primary) 12%, transparent 12.5%, transparent 87%, var(--primary) 87.5%, var(--primary));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+        }
+
+        .dark .pattern-bg {
+            opacity: 0.02;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .nav-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-brand i {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background: var(--bg-subtle);
+            color: var(--primary);
+        }
+
+        .nav-progress {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .progress-bar {
+            width: 120px;
+            height: 6px;
+            background: var(--bg-subtle);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            background: var(--gradient-hero);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, var(--bg), transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.85);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: var(--accent);
+            color: #1a1a1a;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 2rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 168, 83, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Module Navigation Sidebar */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 5rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .sidebar-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .module-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .module-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+            text-align: left;
+            width: 100%;
+            font-family: inherit;
+        }
+
+        .module-nav-item:hover {
+            background: var(--bg-subtle);
+        }
+
+        .module-nav-item.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .module-nav-item.completed .module-check {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .module-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .module-nav-item.active .module-check {
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .module-nav-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .module-nav-item.active .module-nav-text {
+            color: #fff;
+        }
+
+        /* Module Content */
+        .modules-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .module-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .module-card.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .module-header {
+            padding: 2rem;
+            background: var(--bg-subtle);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .module-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .module-goal {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: #fff;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .module-body {
+            padding: 2rem;
+        }
+
+        /* Section Accordions */
+        .section {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .section:hover {
+            border-color: var(--primary);
+        }
+
+        .section-header {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: var(--bg-subtle);
+            transition: all 0.2s;
+        }
+
+        .section-header:hover {
+            background: var(--bg);
+        }
+
+        .section.open .section-header {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .section-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: var(--accent);
+            width: 20px;
+        }
+
+        .section.open .section-title i {
+            color: var(--accent-light);
+        }
+
+        .section-toggle {
+            transition: transform 0.3s;
+        }
+
+        .section.open .section-toggle {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .section.open .section-content {
+            max-height: 2000px;
+        }
+
+        .section-body {
+            padding: 1.5rem;
+            color: var(--text);
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .section-body p {
+            margin-bottom: 1rem;
+        }
+
+        .section-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Highlight Boxes */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--bg-subtle), var(--bg));
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box.tip {
+            border-left-color: var(--primary);
+        }
+
+        .highlight-box.warning {
+            border-left-color: #e67e22;
+        }
+
+        /* Deliverables */
+        .deliverables {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed var(--border);
+        }
+
+        .deliverables-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+        }
+
+        .deliverable-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--bg-subtle);
+            border-radius: 10px;
+            margin-bottom: 0.75rem;
+        }
+
+        .deliverable-item i {
+            color: var(--primary);
+            margin-top: 0.25rem;
+        }
+
+        .deliverable-item strong {
+            color: var(--primary);
+        }
+
+        /* Module Navigation Buttons */
+        .module-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .nav-btn.prev {
+            background: var(--bg-subtle);
+            color: var(--text);
+        }
+
+        .nav-btn.prev:hover {
+            background: var(--border);
+        }
+
+        .nav-btn.next {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .nav-btn.next:hover {
+            background: var(--primary-dark);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .complete-btn {
+            background: var(--accent);
+            color: #1a1a1a;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .complete-btn:hover {
+            background: var(--accent-light);
+        }
+
+        .complete-btn.completed {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* Exercise Box */
+        .exercise-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .exercise-box h4 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-light);
+        }
+
+        .exercise-box p {
+            opacity: 0.95;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .module-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .module-nav-item {
+                flex: 0 0 auto;
+                padding: 0.5rem 0.75rem;
+            }
+
+            .module-nav-text {
+                display: none;
+            }
+
+            .module-check {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                padding: 6rem 1rem 3rem;
+                min-height: 50vh;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .module-header {
+                padding: 1.5rem;
+            }
+
+            .module-title {
+                font-size: 1.5rem;
+            }
+
+            .module-body {
+                padding: 1rem;
+            }
+
+            .section-body {
+                padding: 1rem;
+            }
+
+            .module-nav-buttons {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* Print styles */
+        @media print {
+            nav, .sidebar, .module-nav-buttons, .hero {
+                display: none;
+            }
+
+            .content-wrapper {
+                display: block;
+            }
+
+            .module-card {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+
+            .section-content {
+                max-height: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pattern-bg"></div>
+
+    <nav>
+        <div class="nav-brand">
+            <i class="fas fa-brain"></i>
+            AI Fluency
+        </div>
+        <div class="nav-links">
+            <span class="nav-link" onclick="scrollToHero()">Overview</span>
+            <span class="nav-link" onclick="scrollToModules()">Modules</span>
+        </div>
+        <div class="nav-progress">
+            <span id="progress-text">0/8</span>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Master <span>AI Fluency</span></h1>
+            <p class="hero-subtitle">A comprehensive curriculum to understand, use, and think critically about artificial intelligence—without the hype.</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Modules</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Topics</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Applications</div>
+                </div>
+            </div>
+            <button class="hero-cta" onclick="scrollToModules()">
+                <i class="fas fa-rocket"></i>
+                Start Learning
+            </button>
+        </div>
+    </section>
+
+    <main id="modules-section">
+        <div class="content-wrapper">
+            <aside class="sidebar">
+                <div class="sidebar-title">Curriculum</div>
+                <div class="module-nav" id="module-nav">
+                    <!-- Generated by JS -->
+                </div>
+            </aside>
+
+            <div class="modules-container" id="modules-container">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Curriculum Data
+        const modules = [
+            {
+                id: 1,
+                title: "AI Foundations",
+                goal: "Build confidence without overwhelming learners",
+                sections: [
+                    {
+                        title: "What AI Actually Is (and Isn't)",
+                        icon: "fa-lightbulb",
+                        content: `<p>Artificial intelligence (AI) refers to computational systems designed to perform tasks that typically require human cognition—such as pattern recognition, language generation, and decision support—by learning from large datasets. AI operates through mathematical models and statistical inference, not awareness or understanding.</p>
+                        <p>It does not possess consciousness, intent, emotions, or independent reasoning. Even when AI outputs appear insightful or creative, they are the result of probabilistic pattern matching rather than genuine comprehension.</p>
+                        <div class="highlight-box tip">
+                            <strong>Key Insight:</strong> Understanding this prevents over-trust and reinforces AI's role as a tool that augments human thinking rather than replacing it.
+                        </div>`
+                    },
+                    {
+                        title: "Generative AI, LLMs, Tools vs Models",
+                        icon: "fa-layer-group",
+                        content: `<p><strong>Generative AI</strong> is a category of AI systems designed to produce new content—such as text, images, audio, or code—rather than simply analyzing existing data.</p>
+                        <p><strong>Large Language Models (LLMs)</strong> are a subset of generative AI trained specifically on vast amounts of text to predict and generate human-like language.</p>
+                        <p>An <strong>AI model</strong> is the underlying trained system that performs these predictions, while an <strong>AI tool</strong> is the user-facing application built on top of one or more models.</p>
+                        <div class="highlight-box">
+                            Tools add structure, interfaces, safeguards, and workflows, meaning the same model can behave very differently depending on how the tool is designed and constrained.
+                        </div>`
+                    },
+                    {
+                        title: "Common Myths & Limitations",
+                        icon: "fa-exclamation-triangle",
+                        content: `<p>A widespread myth is that AI is inherently accurate, objective, or authoritative. In practice, AI can produce convincing but incorrect responses, reflect biases present in its training data, and lack real-world awareness or up-to-date information.</p>
+                        <div class="highlight-box warning">
+                            <strong>Critical Understanding:</strong> AI does not verify truth; it predicts plausibility.
+                        </div>
+                        <p>These limitations require users to critically evaluate outputs, cross-check information, and apply human judgment. Over-reliance on AI without verification can lead to misinformation, shallow understanding, and flawed decision-making.</p>`
+                    },
+                    {
+                        title: "Ethical Use & Academic Honesty",
+                        icon: "fa-balance-scale",
+                        content: `<p>Ethical AI use—especially in academic contexts—centers on transparency, responsibility, and learning integrity. AI can be appropriately used for brainstorming, outlining, feedback, and skill practice, but submitting AI-generated content as original work undermines educational goals and violates academic honesty policies.</p>
+                        <p>Ethical use requires understanding institutional guidelines, disclosing AI assistance when required, and ensuring that AI supports—not substitutes—original thinking.</p>
+                        <div class="highlight-box tip">
+                            When used responsibly, AI becomes a powerful learning aid; when misused, it compromises both skill development and credibility.
+                        </div>`
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Prompt Engineering Basics",
+                goal: "Teach users how prompts control output",
+                sections: [
+                    {
+                        title: "Anatomy of a Prompt",
+                        icon: "fa-dna",
+                        content: `<p>An effective prompt is a structured set of instructions that guides an AI system toward a specific, usable output. The five key components are:</p>
+                        <p><strong>Role</strong> defines the perspective or expertise the AI should adopt (e.g., tutor, analyst, editor), shaping tone and depth.</p>
+                        <p><strong>Task</strong> clearly states what the AI is being asked to do, eliminating ambiguity about the goal.</p>
+                        <p><strong>Context</strong> provides background information, audience details, or situational constraints that narrow the response space and improve relevance.</p>
+                        <p><strong>Constraints</strong> set boundaries—such as length, style, sources, or complexity—which reduce off-target or overly generic outputs.</p>
+                        <p><strong>Output Format</strong> specifies how the response should be presented (bullet points, table, paragraph, step-by-step), ensuring the result is immediately usable without additional editing.</p>`
+                    },
+                    {
+                        title: "Why Vague Prompts Fail",
+                        icon: "fa-times-circle",
+                        content: `<p>Vague prompts fail because AI systems optimize for plausibility, not intent. When instructions lack clarity, the model fills in gaps by relying on generalized patterns from training data, often producing broad, surface-level responses that miss the user's actual objective.</p>
+                        <div class="highlight-box warning">
+                            Ambiguity in task definition, missing context, or undefined expectations forces the AI to guess, increasing the likelihood of irrelevant, inaccurate, or inconsistent outputs.
+                        </div>
+                        <p>Precision in prompting reduces cognitive "search space" for the model, leading to higher-quality, more predictable results.</p>`
+                    },
+                    {
+                        title: "Prompt Iteration & Refinement",
+                        icon: "fa-sync-alt",
+                        content: `<p>Prompting is an iterative process rather than a one-time command. Initial outputs should be evaluated for accuracy, depth, and alignment with the intended goal, then refined by adjusting roles, adding constraints, or clarifying context.</p>
+                        <p>Small changes—such as specifying audience level or requesting justification—can significantly improve output quality.</p>
+                        <div class="highlight-box tip">
+                            Expert prompt users treat AI interactions as guided conversations, progressively narrowing and shaping responses through feedback and revision.
+                        </div>`
+                    },
+                    {
+                        title: "Zero-Shot vs Few-Shot Prompts",
+                        icon: "fa-crosshairs",
+                        content: `<p><strong>Zero-shot prompts</strong> provide instructions without examples, relying on the model's prior training to infer the task. They are efficient for simple or well-defined requests but can produce inconsistent results for complex tasks.</p>
+                        <p><strong>Few-shot prompts</strong> include one or more examples that demonstrate the desired output style or reasoning process, significantly improving accuracy and consistency.</p>
+                        <div class="highlight-box">
+                            By showing the model what "good" looks like, few-shot prompting reduces ambiguity and aligns outputs more closely with user expectations.
+                        </div>`
+                    },
+                    {
+                        title: "Hands-On Exercise",
+                        icon: "fa-pencil-alt",
+                        content: `<div class="exercise-box">
+                            <h4><i class="fas fa-tasks"></i> Rewrite Weak Prompts into Strong Prompts</h4>
+                            <p>Practice taking vague, under-specified prompts and rewriting them using all elements of prompt anatomy—role, task, context, constraints, and output format. This exercise reinforces structural thinking and demonstrates how clarity directly improves AI performance.</p>
+                        </div>`
+                    }
+                ],
+                deliverables: [
+                    { title: "Prompt Anatomy Worksheet", description: "A guided worksheet that breaks down each component of an effective prompt, allowing learners to practice constructing, analyzing, and refining prompts for real-world tasks." }
+                ]
+            },
+            {
+                id: 3,
+                title: "Advanced Prompt Frameworks",
+                goal: "Make Outputs More Accurate, Structured, and Usable",
+                sections: [
+                    {
+                        title: "Why Frameworks Matter",
+                        icon: "fa-cubes",
+                        content: `<p>Advanced prompt frameworks reduce ambiguity and impose logical structure on AI outputs, improving reliability and practical usefulness. Rather than relying on intuition or trial-and-error, these frameworks formalize how instructions are delivered to the model.</p>
+                        <div class="highlight-box tip">
+                            By explicitly defining expectations and constraints, users narrow the model's response space, leading to clearer reasoning, better alignment with objectives, and outputs that require minimal post-editing.
+                        </div>`
+                    },
+                    {
+                        title: "The RACE Framework",
+                        icon: "fa-flag-checkered",
+                        content: `<p>The RACE Framework emphasizes clarity and alignment through four components:</p>
+                        <p><strong>Role</strong> establishes the expertise or perspective the AI should assume, shaping tone and depth.</p>
+                        <p><strong>Action</strong> defines the specific task to be performed, ensuring the model understands the objective.</p>
+                        <p><strong>Context</strong> provides situational details, background information, or audience characteristics that guide relevance.</p>
+                        <p><strong>Expectation</strong> specifies quality standards, level of detail, and output format.</p>
+                        <div class="highlight-box">
+                            Together, these components create a balanced prompt that is both directive and flexible, making RACE particularly effective for analytical, educational, and professional tasks.
+                        </div>`
+                    },
+                    {
+                        title: "The CRISP Framework",
+                        icon: "fa-gem",
+                        content: `<p>The CRISP Framework focuses on precision and constraints. It typically includes:</p>
+                        <p><strong>C</strong>ontext • <strong>R</strong>equirements • <strong>I</strong>nstructions • <strong>S</strong>tyle • <strong>P</strong>resentation</p>
+                        <p>CRISP prompts are especially useful when outputs must adhere to strict guidelines, such as word limits, formatting rules, or tonal requirements.</p>
+                        <div class="highlight-box tip">
+                            By explicitly stating how the response should look and what it must include or exclude, CRISP minimizes irrelevant information and increases consistency across outputs.
+                        </div>`
+                    },
+                    {
+                        title: "Step-by-Step Reasoning Prompts",
+                        icon: "fa-list-ol",
+                        content: `<p>Step-by-step reasoning prompts encourage the model to break complex tasks into sequential components before arriving at a final answer. This approach improves accuracy on multi-layered problems by making intermediate reasoning explicit.</p>
+                        <p>While users should critically evaluate each step, structured reasoning prompts often reduce logical gaps and surface assumptions, making outputs easier to review, correct, and apply.</p>`
+                    },
+                    {
+                        title: "Style-Mimic Prompts",
+                        icon: "fa-paint-brush",
+                        content: `<p>Style-mimic prompts instruct the AI to adopt general stylistic characteristics—such as tone, structure, or complexity—without copying specific authors or texts.</p>
+                        <div class="highlight-box warning">
+                            Ethical style prompting focuses on abstract qualities (e.g., "formal academic tone" or "clear instructional style") rather than imitating identifiable individuals.
+                        </div>
+                        <p>This approach allows users to maintain originality while achieving consistent voice and readability across outputs.</p>`
+                    },
+                    {
+                        title: "Multi-Turn Conversation Prompting",
+                        icon: "fa-comments",
+                        content: `<p>Multi-turn prompting treats AI interaction as a guided dialogue rather than a single command. Each response informs the next prompt, allowing users to refine assumptions, add constraints, or request revisions incrementally.</p>
+                        <p>This method is particularly effective for complex projects, as it mirrors human collaboration and enables progressive improvement without overwhelming the model in a single prompt.</p>`
+                    }
+                ],
+                deliverables: [
+                    { title: "Prompt Framework Cheat Sheet", description: "A concise reference guide summarizing each framework, its components, and ideal use cases." },
+                    { title: "25 Reusable Prompt Templates", description: "A curated set of adaptable templates applying RACE, CRISP, and reasoning-based structures to common tasks such as analysis, writing, studying, and productivity." }
+                ]
+            },
+            {
+                id: 4,
+                title: "AI Tools Breakdown",
+                goal: "Tool Literacy Without Overload",
+                sections: [
+                    {
+                        title: "Choosing the Right Tool",
+                        icon: "fa-toolbox",
+                        content: `<p>This module focuses on functional decision-making rather than exhaustive tool coverage. Learners are taught how to select AI tools based on task requirements, reliability needs, and ethical considerations.</p>
+                        <div class="highlight-box tip">
+                            The objective is not mastery of every tool, but confident, intentional use. Understanding each tool's strengths, limitations, and ideal use cases helps users avoid misapplication and over-reliance.
+                        </div>`
+                    },
+                    {
+                        title: "Writing & Research Tools",
+                        icon: "fa-pen-fancy",
+                        content: `<p><strong>ChatGPT / Claude</strong> are general-purpose language tools best suited for drafting, ideation, outlining, editing, and explanatory writing. They excel at transforming ideas, clarifying concepts, and adapting tone for different audiences, but require careful prompting and verification for factual accuracy.</p>
+                        <div class="highlight-box">
+                            These tools are most effective when used as collaborative writing assistants rather than authoritative sources.
+                        </div>
+                        <p><strong>Perplexity</strong> is a research-focused AI designed to prioritize source-backed responses. Unlike conversational models, it emphasizes citations and real-time information retrieval, making it more suitable for exploratory research, fact-checking, and initial source discovery. However, users must still evaluate source quality and relevance.</p>`
+                    },
+                    {
+                        title: "Productivity & Organization Tools",
+                        icon: "fa-tasks",
+                        content: `<p><strong>Notion AI</strong> integrates directly into knowledge management systems, making it ideal for summarizing notes, generating task lists, and maintaining structured workflows. Its strength lies in contextual awareness within a user's workspace rather than standalone reasoning.</p>
+                        <p><strong>Task & workflow automation tools</strong> extend AI functionality by connecting actions across platforms—such as turning emails into tasks or generating recurring workflows. These tools prioritize efficiency and consistency, but require thoughtful setup.</p>
+                        <div class="highlight-box warning">
+                            Learners are encouraged to optimize workflows before automating them to avoid automating flawed processes.
+                        </div>`
+                    },
+                    {
+                        title: "Creative & Design Tools",
+                        icon: "fa-palette",
+                        content: `<p><strong>Image generation tools</strong> are best used for ideation, visual prototyping, and conceptual exploration rather than finalized professional artwork. They translate descriptive prompts into visual outputs, making prompt specificity and stylistic constraints essential.</p>
+                        <p><strong>Presentation & visual AI tools</strong> support slide generation, layout suggestions, and visual storytelling. These tools enhance speed and structure but should be guided by human judgment to ensure clarity, audience alignment, and coherence.</p>
+                        <div class="highlight-box tip">
+                            AI-generated visuals are most effective when treated as drafts or scaffolds rather than final products.
+                        </div>`
+                    },
+                    {
+                        title: "Studying & Learning Tools",
+                        icon: "fa-graduation-cap",
+                        content: `<p><strong>AI-powered summarization tools</strong> help distill complex material into key points, supporting comprehension and review. Their effectiveness depends on input quality and prompt clarity, and they should supplement—not replace—active reading and note-taking.</p>
+                        <p><strong>Practice question generation tools</strong> assist learners by creating quizzes, flashcards, and test-style questions tailored to specific content. This supports retrieval practice and self-assessment but requires verification to ensure alignment with curriculum standards.</p>
+                        <p><strong>Study planning tools</strong> use AI to structure schedules, break down goals, and manage time realistically. These tools are most effective when users provide accurate constraints and remain flexible.</p>`
+                    }
+                ],
+                deliverables: [
+                    { title: "Tool Comparison Table (Use-Case Based)", description: "A structured table that compares tools by task type, strengths, limitations, reliability level, and ethical considerations—enabling learners to quickly choose the right tool for the right job." }
+                ]
+            },
+            {
+                id: 5,
+                title: "Real-World Use Cases",
+                goal: "Turn Knowledge into Practical Outcomes",
+                sections: [
+                    {
+                        title: "Academic Settings",
+                        icon: "fa-university",
+                        content: `<p>In academic settings, AI can support studying and schoolwork when used ethically and transparently. Appropriate applications include concept clarification, outlining essays before writing independently, generating practice questions for retrieval practice, and receiving formative feedback on structure or logic.</p>
+                        <div class="highlight-box tip">
+                            <strong>Key Distinction:</strong> The ethical boundary lies in assistance versus substitution: AI may scaffold thinking, but students must remain the originators of ideas, arguments, and final submissions.
+                        </div>
+                        <p>This use reinforces metacognition and comprehension rather than undermining skill development.</p>`
+                    },
+                    {
+                        title: "Content Creation",
+                        icon: "fa-video",
+                        content: `<p>For content creation, AI serves as a drafting and ideation partner for blogs, scripts, and captions. It can help creators overcome blank-page friction, adapt tone for different audiences, and iterate on structure or phrasing.</p>
+                        <div class="highlight-box warning">
+                            Originality remains the responsibility of the user; AI outputs must be reviewed, refined, and contextualized to avoid generic or derivative content.
+                        </div>
+                        <p>Effective creators treat AI as an accelerator, not a creative authority.</p>`
+                    },
+                    {
+                        title: "Professional & Business Tasks",
+                        icon: "fa-briefcase",
+                        content: `<p>In professional contexts, AI can streamline business tasks such as drafting emails, proposals, and marketing copy by improving clarity, consistency, and efficiency.</p>
+                        <p>Applications include meeting preparation, report summarization, client communication templates, and brainstorming strategic approaches.</p>
+                        <div class="highlight-box tip">
+                            Professional AI use should enhance human expertise, not replace critical thinking or relationship-building skills.
+                        </div>`
+                    },
+                    {
+                        title: "Personal Productivity",
+                        icon: "fa-rocket",
+                        content: `<p>Personal productivity applications—planning schedules, tracking habits, and decomposing long-term goals—benefit from AI's ability to structure information and suggest systems.</p>
+                        <p>AI can help break down overwhelming projects into manageable steps, create accountability frameworks, and identify patterns in personal workflows that could be optimized.</p>`
+                    },
+                    {
+                        title: "Resume & Career Optimization",
+                        icon: "fa-user-tie",
+                        content: `<p>For resume and career optimization, AI can help align language with job descriptions, refine bullet points, and simulate interview questions.</p>
+                        <div class="highlight-box warning">
+                            Ethical use requires accuracy and honesty—avoiding exaggeration or misrepresentation. AI should help articulate genuine accomplishments, not fabricate qualifications.
+                        </div>`
+                    }
+                ]
+            },
+            {
+                id: 6,
+                title: "Prompt Libraries & Systems",
+                goal: "Help Students Build Reusable Systems",
+                sections: [
+                    {
+                        title: "Creating a Personal Prompt Library",
+                        icon: "fa-book",
+                        content: `<p>Creating a personal prompt library transforms AI use from ad hoc experimentation into a repeatable system. Instead of rethinking instructions each time, learners capture effective prompts that have already produced high-quality results.</p>
+                        <div class="highlight-box tip">
+                            This practice mirrors professional workflows, where standard operating procedures increase efficiency and consistency. Over time, a prompt library becomes a personalized knowledge asset that reflects the user's goals, style, and domains of use.
+                        </div>`
+                    },
+                    {
+                        title: "Organizing Prompts by Task",
+                        icon: "fa-folder-open",
+                        content: `<p>Organizing prompts by task or function—such as writing, studying, analysis, or planning—reduces cognitive load and improves retrieval.</p>
+                        <p>Prompts can be tagged with metadata (purpose, constraints, output type) to allow quick adaptation across contexts.</p>
+                        <div class="highlight-box">
+                            Saving and refining successful prompts encourages iterative improvement, reinforcing the idea that prompt quality evolves through use and evaluation rather than initial perfection.
+                        </div>`
+                    },
+                    {
+                        title: "Designing AI Workflows",
+                        icon: "fa-project-diagram",
+                        content: `<p>More advanced users can design AI workflows, where prompts are sequenced to complete multi-step tasks. For example, one prompt may generate an outline, another critiques it, and a third refines tone or structure.</p>
+                        <p>These workflows mirror human problem-solving processes and enable AI to support complex projects without overwhelming a single prompt.</p>
+                        <div class="highlight-box tip">
+                            The result is greater reliability, scalability, and intentionality in AI-assisted work.
+                        </div>`
+                    }
+                ]
+            },
+            {
+                id: 7,
+                title: "Common Mistakes & How to Fix Them",
+                goal: "Reduce Frustration and Misuse",
+                sections: [
+                    {
+                        title: "Over-Reliance on AI",
+                        icon: "fa-user-slash",
+                        content: `<p>One of the most prevalent errors is over-reliance on AI, where users defer judgment or critical thinking to the model. This leads to shallow understanding and dependency, particularly in academic or professional environments that value reasoning and originality.</p>
+                        <div class="highlight-box tip">
+                            <strong>The Fix:</strong> Reframe AI as a collaborator rather than an authority—outputs should always be questioned, edited, and contextualized by the user.
+                        </div>`
+                    },
+                    {
+                        title: "Trusting Hallucinated Answers",
+                        icon: "fa-ghost",
+                        content: `<p>Another frequent issue is trusting hallucinated answers, where AI generates confident but false information. Because language models optimize for plausibility rather than truth, users must verify claims, especially in factual, academic, or technical tasks.</p>
+                        <div class="highlight-box warning">
+                            <strong>Remember:</strong> Confidence in tone does not equal accuracy in content. Always cross-reference important claims with authoritative sources.
+                        </div>`
+                    },
+                    {
+                        title: "Poor Prompt Structure",
+                        icon: "fa-puzzle-piece",
+                        content: `<p>Poor prompt structure—such as missing context or undefined constraints—forces the model to guess, compounding inaccuracy issues.</p>
+                        <p>Common structural problems include vague task definitions, missing audience specifications, unclear output format requirements, and lack of relevant context.</p>
+                        <div class="highlight-box tip">
+                            <strong>The Fix:</strong> Use prompt frameworks (RACE, CRISP) and always specify role, task, context, constraints, and format.
+                        </div>`
+                    },
+                    {
+                        title: "Ignoring Context & Constraints",
+                        icon: "fa-ban",
+                        content: `<p>Ignoring context and constraints often results in responses that are misaligned with audience, purpose, or ethical standards. In academic and professional settings, this can trigger red flags related to integrity, plagiarism, or policy violations.</p>
+                        <div class="highlight-box warning">
+                            Learning to identify these risks early and adjust prompts accordingly ensures responsible, credible, and effective AI use.
+                        </div>`
+                    }
+                ]
+            },
+            {
+                id: 8,
+                title: "Future-Proofing Your AI Skills",
+                goal: "Teach Adaptability, Not Just Tools",
+                sections: [
+                    {
+                        title: "Learning to Learn New Tools",
+                        icon: "fa-graduation-cap",
+                        content: `<p>As AI tools evolve rapidly, long-term competence depends on the ability to learn new tools efficiently rather than mastering any single platform. This involves understanding transferable concepts—prompt structure, evaluation criteria, and ethical considerations—that apply across models and interfaces.</p>
+                        <div class="highlight-box tip">
+                            Learners who focus on principles rather than features adapt more quickly to technological change.
+                        </div>`
+                    },
+                    {
+                        title: "Critical Evaluation Skills",
+                        icon: "fa-search",
+                        content: `<p>Critically evaluating AI outputs remains an essential skill regardless of tool sophistication. Users must assess accuracy, bias, relevance, and alignment with goals, recognizing that improved fluency does not equate to improved truthfulness.</p>
+                        <div class="highlight-box warning">
+                            Developing this evaluative mindset protects against misinformation and overconfidence in automated systems.
+                        </div>`
+                    },
+                    {
+                        title: "Evolving Ethical Awareness",
+                        icon: "fa-compass",
+                        content: `<p>Ethical awareness and AI literacy must evolve alongside technology. As AI becomes more embedded in education, work, and society, users are responsible for understanding appropriate boundaries, disclosure expectations, and long-term implications.</p>
+                        <div class="highlight-box tip">
+                            <strong>Key Takeaway:</strong> Future-proof AI skill is not about using the most advanced tool—it is about maintaining judgment, integrity, and adaptability in an AI-augmented world.
+                        </div>`
+                    }
+                ]
+            }
+        ];
+
+        // State
+        let currentModuleIndex = 0;
+        const completedModules = new Set();
+
+        // Initialize
+        function init() {
+            renderModuleNav();
+            renderModules();
+            setActiveModule(0);
+            updateProgress();
+        }
+
+        function renderModuleNav() {
+            const nav = document.getElementById('module-nav');
+            nav.innerHTML = modules.map((mod, idx) => `
+                <button class="module-nav-item${idx === 0 ? ' active' : ''}" data-index="${idx}" onclick="setActiveModule(${idx})">
+                    <span class="module-check">${idx + 1}</span>
+                    <span class="module-nav-text">${mod.title}</span>
+                </button>
+            `).join('');
+        }
+
+        function renderModules() {
+            const container = document.getElementById('modules-container');
+            container.innerHTML = modules.map((mod, idx) => `
+                <div class="module-card${idx === 0 ? ' active' : ''}" data-module="${idx}">
+                    <div class="module-header">
+                        <div class="module-number">Module ${mod.id}</div>
+                        <h2 class="module-title">${mod.title}</h2>
+                        <span class="module-goal"><i class="fas fa-bullseye"></i> ${mod.goal}</span>
+                    </div>
+                    <div class="module-body">
+                        ${mod.sections.map((section, sIdx) => `
+                            <div class="section${sIdx === 0 ? ' open' : ''}" data-section="${sIdx}">
+                                <div class="section-header" onclick="toggleSection(this)">
+                                    <span class="section-title">
+                                        <i class="fas ${section.icon}"></i>
+                                        ${section.title}
+                                    </span>
+                                    <i class="fas fa-chevron-down section-toggle"></i>
+                                </div>
+                                <div class="section-content">
+                                    <div class="section-body">
+                                        ${section.content}
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+
+                        ${mod.deliverables ? `
+                            <div class="deliverables">
+                                <div class="deliverables-title"><i class="fas fa-file-alt"></i> Deliverables</div>
+                                ${mod.deliverables.map(d => `
+                                    <div class="deliverable-item">
+                                        <i class="fas fa-check-circle"></i>
+                                        <div><strong>${d.title}</strong><br><span style="color: var(--text-muted); font-size: 0.9rem;">${d.description}</span></div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+
+                        <div class="module-nav-buttons">
+                            <button class="nav-btn prev" onclick="prevModule()" ${idx === 0 ? 'disabled' : ''}>
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button class="complete-btn ${completedModules.has(idx) ? 'completed' : ''}" onclick="toggleComplete(${idx})">
+                                <i class="fas ${completedModules.has(idx) ? 'fa-check' : 'fa-bookmark'}"></i>
+                                ${completedModules.has(idx) ? 'Completed' : 'Mark Complete'}
+                            </button>
+                            <button class="nav-btn next" onclick="nextModule()" ${idx === modules.length - 1 ? 'disabled' : ''}>
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function setActiveModule(idx) {
+            currentModuleIndex = idx;
+
+            // Update nav
+            document.querySelectorAll('.module-nav-item').forEach((item, i) => {
+                item.classList.toggle('active', i === idx);
+            });
+
+            // Update cards
+            document.querySelectorAll('.module-card').forEach((card, i) => {
+                card.classList.toggle('active', i === idx);
+            });
+
+            // Scroll to modules section on mobile
+            if (window.innerWidth < 900) {
+                document.getElementById('modules-section').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleSection(header) {
+            const section = header.parentElement;
+            section.classList.toggle('open');
+        }
+
+        function prevModule() {
+            if (currentModuleIndex > 0) {
+                setActiveModule(currentModuleIndex - 1);
+            }
+        }
+
+        function nextModule() {
+            if (currentModuleIndex < modules.length - 1) {
+                setActiveModule(currentModuleIndex + 1);
+            }
+        }
+
+        function toggleComplete(idx) {
+            if (completedModules.has(idx)) {
+                completedModules.delete(idx);
+            } else {
+                completedModules.add(idx);
+            }
+
+            // Update button
+            const card = document.querySelector(`.module-card[data-module="${idx}"]`);
+            const btn = card.querySelector('.complete-btn');
+            btn.classList.toggle('completed', completedModules.has(idx));
+            btn.innerHTML = completedModules.has(idx)
+                ? '<i class="fas fa-check"></i> Completed'
+                : '<i class="fas fa-bookmark"></i> Mark Complete';
+
+            // Update nav item
+            const navItem = document.querySelector(`.module-nav-item[data-index="${idx}"]`);
+            navItem.classList.toggle('completed', completedModules.has(idx));
+            navItem.querySelector('.module-check').innerHTML = completedModules.has(idx)
+                ? '<i class="fas fa-check"></i>'
+                : (idx + 1);
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const completed = completedModules.size;
+            const total = modules.length;
+            const percent = (completed / total) * 100;
+
+            document.getElementById('progress-text').textContent = `${completed}/${total}`;
+            document.getElementById('progress-fill').style.width = `${percent}%`;
+        }
+
+        function scrollToHero() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToModules() {
+            document.getElementById('modules-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
